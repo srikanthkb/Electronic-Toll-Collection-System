@@ -2,6 +2,10 @@ from datetime import datetime
 from vehicleDatabaseParser import VehicleDatabaseParser
 from vehicle import Vehicle
 from resultCodes import *
+import logging
+
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 class VehiclePricingDecision:
 
@@ -30,39 +34,47 @@ class VehiclePricingDecision:
             return VEHICLE_OVERLOADED
         
         # If vehicle is legal and allowed, proceed for calculation of toll price
-        print("Calculating your toll price...")
         tollPrice = self.__calculateTollPrice(currentWeight)
         
         return tollPrice
 
     def __calculateTollPrice(self, currentWeight):
         ''' Pricing of the allowed vehicles '''
-        return currentWeight//25
+        print("Calculating your toll price...")
+        return currentWeight//12
 
     def __checkRcStatus(self, vehicle):
+        print("Checking your Vehicle RC Status...")
         if vehicle.rcStatus == 'ACTIVE':
+            print('DONE.')
             return True
         else:
             return False
     
     def __checkRegistrationExpiry(self, vehicle):
+        print("Checking your Vehicle Registration validity...")
         expiryDate = datetime.strptime(vehicle.registrationExpiryDate, '%d-%b-%Y').date()
         if expiryDate > datetime.today().date():
+            print("DONE.")
             return True
         else:
             return False
 
     def __checkInsuranceExpiry(self, vehicle):
+        print("Checking your Vehicle Insurance Validity...")
         expiryDate = datetime.strptime(vehicle.insuranceExpiryDate, '%d-%b-%Y').date()
         if expiryDate > datetime.today().date():
+            print("DONE.")
             return True
         else:
             return False
     
     def __checkOverload(self, vehicle, currentWeight):
+        print("Checking the weight of vehicle for overload...")
         if currentWeight >= vehicle.vehicleGvwr:
             return False
         else:
+            print("DONE.")
             return True
 
 if __name__ == "__main__":
