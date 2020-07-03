@@ -11,8 +11,8 @@ VEHICLE_ALLOWED = 5
 
 def vehicleNotAllowed(reason):
     print("There seems to be a problem...")
-    print(reason)
-    print('Please wait until the officials arrive and resolve this manually...')
+    print("Error:", reason)
+    print('Please wait until the officials arrive and ' + '\n' + 'resolve this manually...')
     print('Thank you...')
 
 def vehicleAllowed(price):
@@ -27,7 +27,7 @@ def decideTollAction(tollDecision):
     elif tollDecision == VEHICLE_RC_NOT_ACTIVE:
         return vehicleNotAllowed('Vehicle Registration has expired')
     elif tollDecision == VEHICLE_INSURANCE_EXPIRED:
-        return vehicleNotAllowed('Vehicle Insurance has expired')
+        return vehicleNotAllowed('Your vehicle Insurance has expired')
     elif tollDecision == VEHICLE_OVERLOADED:
         return vehicleNotAllowed('Vehicle is loaded above maximum capacity')
     else:
