@@ -67,11 +67,15 @@ class VehiclePricingDecision:
             print("DONE.")
             return True
         else:
+            print("Vehicle Insurance Validity Date:", vehicle.insuranceExpiryDate)
+            print("Todays date:", datetime.today().date())
             return False
     
     def __checkOverload(self, vehicle, currentWeight):
         print("Checking the weight of vehicle for overload...")
         if currentWeight >= vehicle.vehicleGvwr:
+            print("Current Weight of the vehicle =", currentWeight)
+            print("Maximum allowed weight for your vehicle =", vehicle.vehicleGvwr)
             return False
         else:
             print("DONE.")
